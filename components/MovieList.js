@@ -1,13 +1,19 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import { MOVIE_LIST } from '../constants/index';
 
 const MovieList = () => {
 	return (
 		<View>
-		{MOVIE_LIST.map(movie => ( 
-			<Text>{movie.original_title}</Text>
-		))}
+		{MOVIE_LIST.map(movie => {
+			console.log(`https://image.tmdb.org/t/p/w500${movie.poster_path}`)
+			return (
+				<Image
+					style={{ height: 250, width: 150, resizeMode: 'stretch' }}
+					key={movie.id}
+					source={{uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`}} />
+			)})
+		}
 		</View>
 	)
 }

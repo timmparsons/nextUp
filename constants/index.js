@@ -54,8 +54,12 @@ export const FRIEND_LIST = [
 
 export const GENRES = [
 	{
-			"id": 28,
-			"name": "Action"
+		"id": 1,
+		"name": "Most Popular"
+	},
+	{
+		"id": 28,
+		"name": "Action"
 	},
 	{
 			"id": 12,

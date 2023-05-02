@@ -1,10 +1,8 @@
 import React from 'react'
 import { View, Text, Button, SafeAreaView, TextInput } from 'react-native'
-import { styled } from 'nativewind';
 import * as Icon from 'react-native-feather';
 import Categories from '../components/Categories';
-
-const StyledText = styled(Text);
+import MovieList from '../components/MovieList';
 
 const HomeScreen = () => {
 	return (
@@ -20,6 +18,7 @@ const HomeScreen = () => {
 				title='Go To My Movies'
 				onPress={() => navigation.navigate('My Movies')} /> */}
 			<Categories />
+			<MovieList />
 		</SafeAreaView>
 	)
 }

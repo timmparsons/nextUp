@@ -1,24 +1,13 @@
 import React, { useState} from 'react'
-import { View, Text, FlatList, TouchableOpacity } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
 import { MOVIE_LIST, GENRES } from '../constants/index';
 
 const Categories = () => {
 	const [activeGenre, setActiveGenre] = useState(null);
 
-	const Item = ({title}) => (
-		<View>
-			<Text>{title}</Text>
-		</View>
-	);
-
 	return (
-		<View className='mt-4'>
-		<FlatList
-			data={GENRES}
-			renderItem={({item}) => <Item title={item.title} />}
-			keyExtractor={item => item.id}
-		/>
-			{/* <ScrollView
+		<View className='mx-4 my-4'>
+			<ScrollView
 				horizontal
 				showsHorizontalScrollIndicator={false}
 				className='overflow-visible'
@@ -28,20 +17,19 @@ const Categories = () => {
 			>
 			{ GENRES.map((genre, index) => {
 				const isActive = genre.id == activeGenre;
-				const activeButton = isActive ? 'bg-gray-600' : 'bg-gray-200';
 				const activeText = isActive ? 'font-semibold text-gray-800' : 'text-gray-500';
 
 				return (
-					<View key={index} className='flex justify-content items-center mr-10'>
+					<View key={index} className='mr-5'>
 						<TouchableOpacity
-							className='p-1 rounded-full shadow bg-gray-200'
+							className='bg-gray-200 p-3 rounded'
 							onPress={() => setActiveGenre(genre.id)}>
-								<Text className={'text-sm' +activeText}>{genre.name}</Text>
+								<Text className={'text-lg' +activeText}>{genre.name}</Text>
 							</TouchableOpacity>
 					</View>
 				)
 			})}
-			</ScrollView> */}
+			</ScrollView>
 		</View>
 	)
 }
