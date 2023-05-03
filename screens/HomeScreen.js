@@ -18,7 +18,7 @@ const HomeScreen = () => {
 				title='Go To My Movies'
 				onPress={() => navigation.navigate('My Movies')} /> */}
 			<Categories />
-			<View className='flex'>
+			<View>
 				<MovieList />
 			</View>
 		</SafeAreaView>
