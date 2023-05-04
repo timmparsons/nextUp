@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Button, SafeAreaView, TextInput } from 'react-native'
+import { View, Text, Button, SafeAreaView, TextInput, StyleSheet } from 'react-native'
 import * as Icon from 'react-native-feather';
 import Categories from '../components/Categories';
 import MovieList from '../components/MovieList';
@@ -17,12 +17,16 @@ const HomeScreen = () => {
 			{/* <Button
 				title='Go To My Movies'
 				onPress={() => navigation.navigate('My Movies')} /> */}
-			<Categories />
+			<View>
+				<Categories />
+			</View>
 			<View>
 				<MovieList />
 			</View>
 		</SafeAreaView>
 	)
 }
+
+const styles = StyleSheet.create({})
 
 export default HomeScreen;

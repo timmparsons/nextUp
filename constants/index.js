@@ -59,6 +59,66 @@ export const MOVIE_LIST = [
     "video": false,
     "vote_average": 6.8,
     "vote_count": 1380
+},
+{
+	"adult": false,
+	"backdrop_path": "/bT3IpP7OopgiVuy6HCPOWLuaFAd.jpg",
+	"genre_ids": [
+			35,
+			9648,
+			28
+	],
+	"id": 638974,
+	"original_language": "en",
+	"original_title": "Murder Mystery 2",
+	"overview": "After starting their own detective agency, Nick and Audrey Spitz land a career-making case when their billionaire pal is kidnapped from his wedding.",
+	"popularity": 2099.981,
+	"poster_path": "/s1VzVhXlqsevi8zeCMG9A16nEUf.jpg",
+	"release_date": "2023-03-28",
+	"title": "Murder Mystery 2",
+	"video": false,
+	"vote_average": 6.6,
+	"vote_count": 920
+},
+{
+	"adult": false,
+	"backdrop_path": "/44immBwzhDVyjn87b3x3l9mlhAD.jpg",
+	"genre_ids": [
+			27,
+			9648,
+			53
+	],
+	"id": 934433,
+	"original_language": "en",
+	"original_title": "Scream VI",
+	"overview": "Following the latest Ghostface killings, the four survivors leave Woodsboro behind and start a fresh chapter.",
+	"popularity": 3854.657,
+	"poster_path": "/wDWwtvkRRlgTiUr6TyLSMX8FCuZ.jpg",
+	"release_date": "2023-03-08",
+	"title": "Scream VI",
+	"video": false,
+	"vote_average": 7.4,
+	"vote_count": 908
+},
+{
+	"adult": false,
+	"backdrop_path": "/b9UCfDzwiWw7mIFsIQR9ZJUeh7q.jpg",
+	"genre_ids": [
+			10749,
+			28,
+			35
+	],
+	"id": 868759,
+	"original_language": "en",
+	"original_title": "Ghosted",
+	"overview": "Salt-of-the-earth Cole falls head over heels for enigmatic Sadie — but then makes the shocking discovery that she’s a secret agent. Before they can decide on a second date, Cole and Sadie are swept away on an international adventure to save the world.",
+	"popularity": 4667.034,
+	"poster_path": "/liLN69YgoovHVgmlHJ876PKi5Yi.jpg",
+	"release_date": "2023-04-18",
+	"title": "Ghosted",
+	"video": false,
+	"vote_average": 7.3,
+	"vote_count": 513
 }
 ]
 
