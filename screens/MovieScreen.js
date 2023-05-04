@@ -1,4 +1,6 @@
 import React from 'react'
+import * as Icon from 'react-native-feather';
+
 import { View, Text, Button, SafeAreaView, Image, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { MOVIE_LIST } from '../constants/index';
@@ -17,10 +19,9 @@ const MovieScreen = ({ route }) => {
 					key={movie.id}
 					source={{uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`}} 
 					/>
-
 				</View>
 			</View>
-
+		<Icon.Share height={25} width={25} />
 		</SafeAreaView>
 	)
 }
