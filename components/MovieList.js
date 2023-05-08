@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { View, FlatList, StyleSheet } from 'react-native'
 import { MOVIE_LIST } from '../constants/index';
 import SharePopup from './SharePopup';
@@ -6,21 +7,20 @@ import MovieItem from './MovieItem';
 
 const MovieList = () => {
 	const [ selected, setSelected ] = useState(null)
-	const [ showModal, setShowModal ] = useState(false)
-	
+	const showPopup = useSelector((state) => state.movie.showSharePopup)
+	console.log('qqq', showPopup)
+
 	return (
 		<View>
 			<FlatList
 				data={MOVIE_LIST}
-				renderItem={({item}) => <MovieItem movie={item} setSelected={setSelected} selected={selected} setShowModal={setShowModal}/>}
+				renderItem={({item}) => <MovieItem movie={item} setSelected={setSelected} selected={selected} />}
 				keyExtractor={item => item.id}
 				numColumns={3}
 				style={styles.list}
 			/>
-			{ selected && showModal &&
+			{ selected && showPopup &&
 				<SharePopup
-					showModal={showModal}
-					setShowModal={setShowModal}
 					setSelected={setSelected} />
 			}
 		</View>

@@ -1,24 +1,26 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { SafeAreaView, View, Text, StyleSheet, Button } from 'react-native'
 import Modal from 'react-native-modal';
+import { showSharePopup } from '../redux/slices/movieSlice';
 
 const SharePopup = ({
 	movie,
-	showModal,
-	setShowModal,
 	setSelected 
 }) => {
+	const isVisible = useSelector(state => state.movie.showSharePopup)
+	const dispatch = useDispatch();
 	return (
 		<SafeAreaView>
 			<Modal
-				isVisible={showModal}
+				isVisible={isVisible}
 				style={styles.bottomModal}>
 				<View style={styles.modalContent}>
 					<Text></Text>
 					<Button 
 						title='close'
 						onPress={() => {
-							setShowModal(false)
+							dispatch(showSharePopup(false))
 							setSelected(null)	
 						}}
 					/>
