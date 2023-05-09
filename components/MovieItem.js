@@ -1,22 +1,22 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { View, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
-import { showSharePopup } from '../redux/slices/movieSlice';
+import { setSelectedMovie } from '../redux/slices/movieSlice';
 
-const MovieItem = ({movie, setSelected, selected}) => {
+const MovieItem = ({movie}) => {
 	const navigation = useNavigation();
 	const dispatch = useDispatch();
+	const selectedMovieId = useSelector((state) => state.movie.selectedMovie)
+	//TODO: Fix background color on select
 
 	return (
   <View style={styles.container}>
 		<TouchableOpacity
 			onLongPress={() => {
-				setSelected((currentSelected) => movie.id === currentSelected ? null : movie.id)
-				dispatch(showSharePopup(true))
-			}
-			}
-			style={selected === movie.id && styles.imageSelected}
+				dispatch(setSelectedMovie({ movie, showSharePopup: true}))
+			}}
+			style={selectedMovieId === movie.id && styles.imageSelected}
 			onPress={() => navigation.navigate({
 				name: 'Movie Screen',
 				params: { id: movie.id },

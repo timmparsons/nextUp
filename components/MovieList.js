@@ -6,22 +6,19 @@ import SharePopup from './SharePopup';
 import MovieItem from './MovieItem';
 
 const MovieList = () => {
-	const [ selected, setSelected ] = useState(null)
 	const showPopup = useSelector((state) => state.movie.showSharePopup)
-	console.log('qqq', showPopup)
 
 	return (
 		<View>
 			<FlatList
 				data={MOVIE_LIST}
-				renderItem={({item}) => <MovieItem movie={item} setSelected={setSelected} selected={selected} />}
+				renderItem={({item}) => <MovieItem movie={item} />}
 				keyExtractor={item => item.id}
 				numColumns={3}
 				style={styles.list}
 			/>
-			{ selected && showPopup &&
-				<SharePopup
-					setSelected={setSelected} />
+			{ showPopup &&
+				<SharePopup />
 			}
 		</View>
 	)
