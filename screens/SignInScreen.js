@@ -11,14 +11,14 @@ const SignInScreen = () => {
     email: '',
     password: '',
     error: ''
-  })
+  });
 
   async function signIn() {
     if (value.email === '' || value.password === '') {
       setValue({
         ...value,
         error: 'Email and password are mandatory.'
-      })
+      });
       return;
     }
 
@@ -27,8 +27,8 @@ const SignInScreen = () => {
     } catch (error) {
       setValue({
         ...value,
-        error: error.message,
-      })
+        error: error.message
+      });
     }
   }
 
@@ -36,37 +36,35 @@ const SignInScreen = () => {
     <View style={styles.container}>
       <Text>Sign In screen!</Text>
 
-      {!!value.error && <View style={styles.error}><Text>{value.error}</Text></View>}
+      {!!value.error && (
+        <View style={styles.error}>
+          <Text>{value.error}</Text>
+        </View>
+      )}
 
       <View style={styles.controls}>
         <TextInput
           placeholder='Email'
-          containerStyle={styles.control}
+          style={styles.input}
           value={value.email}
-          onChangeText={(text) => setValue({ ...value, email: text })}
-          leftIcon={<Icon
-            name='envelope'
-            size={16}
-          />}
+          onChangeText={text => setValue({ ...value, email: text })}
+          leftIcon={<Icon name='envelope' size={16} />}
         />
 
         <TextInput
           placeholder='Password'
-          containerStyle={styles.control}
+          style={styles.input}
           value={value.password}
-          onChangeText={(text) => setValue({ ...value, password: text })}
+          onChangeText={text => setValue({ ...value, password: text })}
           secureTextEntry={true}
-          leftIcon={<Icon
-            name='key'
-            size={16}
-          />}
+          leftIcon={<Icon name='key' size={16} />}
         />
 
-        <Button title="Sign in" buttonStyle={styles.control} onPress={signIn} />
+        <Button title='Sign in' buttonStyle={styles.control} onPress={signIn} />
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -74,22 +72,22 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
-
   controls: {
-    flex: 1,
+    flex: 1
   },
-
-  control: {
-    marginTop: 10
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10
   },
-
   error: {
     marginTop: 10,
     padding: 10,
     color: '#fff',
-    backgroundColor: '#D54826FF',
+    backgroundColor: '#D54826FF'
   }
 });
 
