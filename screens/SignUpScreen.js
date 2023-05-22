@@ -3,6 +3,7 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button } from 'react-native-elements';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { collection, addDoc } from 'firebase/firestore';
 
 const auth = getAuth();
 
@@ -23,7 +24,18 @@ const SignUpScreen = ({ navigation }) => {
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, value.email, value.password);
+      await createUserWithEmailAndPassword(
+        auth,
+        value.email,
+        value.password
+      ).then(cred => {
+        return addDoc(collection(db, 'users'), {
+          first: 'Ada',
+          last: 'Lovelace',
+          born: 1815
+        });
+      });
+
       navigation.navigate('Sign In');
     } catch (error) {
       setValue({
