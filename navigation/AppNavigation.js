@@ -6,7 +6,7 @@ import HomeScreen from '../screens/HomeScreen';
 import MyMoviesScreen from '../screens/MyMoviesScreen';
 import RandomScreen from '../screens/RandomScreen';
 import MovieScreen from '../screens/MovieScreen';
-import WelcomeScreen from '../screens/Welcome';
+import WelcomeScreen from '../screens/WelcomeScreen';
 import SignInScreen from '../screens/SignInScreen';
 import SignOutScreen from '../screens/SignUpScreen';
 
