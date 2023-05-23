@@ -20,7 +20,6 @@ const MovieList = () => {
   useEffect(() => {
     dispatch(getMovies());
   }, []);
-  console.log('xxx', popularMovies);
 
   return showLoadingState === true ? (
     <Text>Loading...</Text>

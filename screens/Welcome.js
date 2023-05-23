@@ -1,19 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { Button } from 'react-native-elements';
 
 const WelcomeScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Text>Welcome screen!</Text>
-
+    <SafeAreaView style={styles.container}>
       <View style={styles.buttons}>
-        <Button title="Sign in" buttonStyle={styles.button} onPress={() => navigation.navigate('Sign In')} />
-        <Button title="Sign up" type="outline" buttonStyle={styles.button} onPress={() => navigation.navigate('Sign Up')} />
+        <Button
+          title='Sign in'
+          buttonStyle={styles.button}
+          onPress={() => navigation.navigate('Sign In')}
+        />
+        <Button
+          title='Sign up'
+          type='outline'
+          buttonStyle={styles.button}
+          onPress={() => navigation.navigate('Sign Up')}
+        />
       </View>
-    </View>
+    </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -21,11 +28,11 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
 
   buttons: {
-    flex: 1,
+    flex: 1
   },
 
   button: {
