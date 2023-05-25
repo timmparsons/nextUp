@@ -16,14 +16,15 @@ const MovieItem = ({ movie }) => {
         onLongPress={() => {
           dispatch(setSelectedMovie({ movie, showSharePopup: true }));
         }}
-        style={selectedMovieId === movie.id && styles.imageSelected}
-        onPress={() =>
+        // style={selectedMovieId === movie.id && styles.imageSelected}
+        style={styles.movieImage}
+        onPress={() => {
           navigation.navigate({
-            name: 'Movie Screen',
+            name: 'MovieScreen',
             params: { id: movie.id },
             merge: true
-          })
-        }
+          });
+        }}
       >
         <Image
           style={styles.image}
@@ -47,7 +48,11 @@ const styles = StyleSheet.create({
     height: 250,
     aspectRatio: 1 / 2,
     flexDirection: 'column',
-    margin: 9
+    margin: 9,
+    borderRadius: 20
+  },
+  movieImage: {
+    padding: 2
   },
   imageSelected: {
     backgroundColor: 'red'

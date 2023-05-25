@@ -11,8 +11,8 @@ export default function App() {
     <ThemeProvider>
       <Provider store={store}>
         <NavigationContainer>
-          <HomeScreen />
-          {/* <AppNavigation /> */}
+          {/* <HomeScreen /> */}
+          <AppNavigation />
         </NavigationContainer>
       </Provider>
     </ThemeProvider>

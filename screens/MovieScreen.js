@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectAllPopularMovies } from '../redux/slices/movieSlice';
 import * as Icon from 'react-native-feather';
+import BackButton from '../components/BackButton';
 
 import {
   View,
@@ -23,6 +24,7 @@ const MovieScreen = ({ route }) => {
   return (
     <SafeAreaView>
       <View style={styles.container}>
+        <BackButton />
         <Text style={styles.heading}>{movie.original_title}</Text>
         <Text style={styles.overview}>{movie.overview}</Text>
         <View>
