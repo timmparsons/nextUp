@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -6,32 +6,36 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
-  FlatList
+  FlatList,
+  ScrollView
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import MovieItem from '../components/MovieItem';
 import {
-  selectAllPopularMovies,
-  getPopularMovies,
+  selectTrendingList,
   showMovieLoadingState,
   selectShowPopup
 } from '../redux/slices/movieSlice';
+import { getTrendingMovies, getTrendingTvShows } from '../api/apiCalls';
 import SharePopup from '../components/SharePopup';
 import { useAuthentication } from '../utils/hooks/useAuthentication';
 import { getAuth, signOut } from 'firebase/auth';
+import { apiCalls } from '../api/index';
+import { ENDPOINTS } from '../constants';
 
 export default function HomeScreen({ navigation }) {
+  const [activeCategory, setActiveCategory] = useState('Trending Movies');
   const showPopup = useSelector(selectShowPopup);
   const showLoadingState = useSelector(showMovieLoadingState);
 
   const { user } = useAuthentication();
   const auth = getAuth();
 
-  const popularMovies = useSelector(selectAllPopularMovies);
+  const trendingList = useSelector(selectTrendingList);
   const dispatch = useDispatch();
-
+  console.log('qqq', trendingList?.results);
   useEffect(() => {
-    dispatch(getPopularMovies());
+    dispatch(getTrendingMovies());
   }, []);
 
   return (
@@ -42,25 +46,56 @@ export default function HomeScreen({ navigation }) {
           <Text style={styles.logoutButton}>Logout</Text>
         </TouchableOpacity>
       </View>
+
+      {/* Header banner */}
       <View style={styles.bannerContainer}>
         <Image
           source={require('../assets/office.jpg')}
           style={styles.bannerImage}
         />
       </View>
+
       <View style={styles.moviesSection}>
-        <View style={styles.container}>
-          <Text style={styles.moviesSectionHeader}>Popular Movies</Text>
-          <TouchableOpacity>
-            <Text>Share Movie</Text>
-          </TouchableOpacity>
+        <View style={styles.trendingMovieContainer}>
+          {/* Trending List */}
+          <ScrollView horizontal style={styles.movieListHeader}>
+            {apiCalls.map((topic, index) => {
+              const isActive = topic.id == activeCategory;
+
+              return (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => {
+                    setActiveCategory(topic.id);
+                    console.log(topic.id);
+                    dispatch(
+                      topic.id === ENDPOINTS.trendingTvShows
+                        ? getTrendingTvShows()
+                        : getTrendingMovies()
+                    );
+                  }}
+                  style={styles.categoryContainer}
+                >
+                  <Text
+                    style={
+                      isActive
+                        ? styles.selectedCategory
+                        : styles.unselectedCategory
+                    }
+                  >
+                    {topic.id}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </ScrollView>
         </View>
         <View>
           {showLoadingState === true ? (
             <Text>Loading...</Text>
           ) : (
             <FlatList
-              data={popularMovies}
+              data={trendingList?.results}
               showsVerticalScrollIndicator={false}
               renderItem={({ item }) => <MovieItem movie={item} />}
               keyExtractor={item => item.id}
@@ -114,5 +149,14 @@ const styles = StyleSheet.create({
   list: {
     flexDirection: 'row',
     flexWrap: 'wrap'
+  },
+  categoryContainer: {
+    marginRight: 5,
+    padding: 2
+  },
+  selectedCategory: {
+    fontWeight: 'bold',
+    borderWidth: 0.5,
+    padding: 2
   }
 });

@@ -1,3 +1,8 @@
+export const ENDPOINTS = {
+  trendingMovies: 'Trending Movies',
+  trendingTvShows: 'Trending TV Shows'
+};
+
 export const MOVIE_LIST = [
   {
     adult: false,

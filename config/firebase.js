@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { initializeAuth } from 'firebase/auth';
-import { getAnalytics } from 'firebase/analytics';
 import 'firebase/auth';
 import { getAuth } from 'firebase/auth';
 import Constants from 'expo-constants';
@@ -28,6 +27,4 @@ const app = initializeApp(firebaseConfig);
 initializeAuth(app, {
   persistence: getReactNativePersistence(AsyncStorage)
 });
-const analytics = getAnalytics(app);
-
 export const auth = getAuth(app);

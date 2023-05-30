@@ -1,47 +1,19 @@
+import { createSlice } from '@reduxjs/toolkit';
 import {
-  createSlice,
-  createAsyncThunk,
-  isRejectedWithValue
-} from '@reduxjs/toolkit';
+  getPopularMovies,
+  getTrendingMovies,
+  getTrendingTvShows
+} from '../../api/apiCalls';
 
 const initialState = {
   status: 'idle',
   showSharePopup: false,
+  trendingList: null,
   popularMovies: null,
+  trendingMovies: null,
+  trendingTvShows: null,
   error: null
 };
-
-const options = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization:
-      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MGMwM2NhNzZkY2FiNzY3MDAzYmI5MDc2OGZmZTMwMyIsInN1YiI6IjVmMTM2NTdkNzg1NzBlMDAzNDU3YjczMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9JQqWVF0mvJY-vamd5lFkQhcs39AYlefqL3muHzitEg'
-  }
-};
-
-fetch(
-  'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
-  options
-)
-  .then(response => response.json())
-  .then(response => console.log(response))
-  .catch(err => console.error(err));
-
-export const getPopularMovies = createAsyncThunk(
-  'posts/getPosts',
-  async thunkAPI => {
-    try {
-      const res = await fetch(
-        'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc',
-        options
-      ).then(data => data.json());
-      return res;
-    } catch (error) {
-      return isRejectedWithValue(error);
-    }
-  }
-);
 
 export const movieSlice = createSlice({
   name: 'movie',
@@ -64,6 +36,28 @@ export const movieSlice = createSlice({
       .addCase(getPopularMovies.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
+      })
+      .addCase(getTrendingMovies.pending, state => {
+        state.status = 'loading';
+      })
+      .addCase(getTrendingMovies.fulfilled, (state, { payload }) => {
+        state.status = 'succeeded';
+        state.trendingList = payload;
+      })
+      .addCase(getTrendingMovies.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(getTrendingTvShows.pending, state => {
+        state.status = 'loading';
+      })
+      .addCase(getTrendingTvShows.fulfilled, (state, { payload }) => {
+        state.status = 'succeeded';
+        state.trendingList = payload;
+      })
+      .addCase(getTrendingTvShows.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
       });
   }
 });
@@ -75,6 +69,7 @@ export default movieSlice.reducer;
 
 // Selectors
 export const selectShowPopup = state => state.movie.showSharePopup;
+export const selectTrendingList = state => state.movie.trendingList;
 export const selectAllPopularMovies = state =>
   state.movie?.popularMovies?.results;
 export const showMovieLoadingState = state => state.movie.status;

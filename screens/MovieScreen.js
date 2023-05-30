@@ -18,7 +18,6 @@ const MovieScreen = ({ route }) => {
   const currentMovie = popularMovies.find(
     movie => movie.id === route.params.id
   );
-  console.log('qqq', currentMovie);
 
   const movie = popularMovies.find(movie => movie.id === route.params.id);
   return (
