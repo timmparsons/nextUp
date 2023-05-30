@@ -47,14 +47,6 @@ export default function HomeScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      {/* Header banner */}
-      <View style={styles.bannerContainer}>
-        <Image
-          source={require('../assets/office.jpg')}
-          style={styles.bannerImage}
-        />
-      </View>
-
       <View style={styles.moviesSection}>
         <View style={styles.trendingMovieContainer}>
           {/* Trending List */}

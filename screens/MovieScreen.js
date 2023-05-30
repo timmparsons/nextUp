@@ -1,6 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectAllPopularMovies } from '../redux/slices/movieSlice';
+import {
+  selectAllPopularMovies,
+  selectTrendingList
+} from '../redux/slices/movieSlice';
 import * as Icon from 'react-native-feather';
 import BackButton from '../components/BackButton';
 
@@ -14,12 +17,11 @@ import {
 } from 'react-native';
 
 const MovieScreen = ({ route }) => {
-  const popularMovies = useSelector(selectAllPopularMovies);
-  const currentMovie = popularMovies.find(
+  const popularMovies = useSelector(selectTrendingList);
+  const movie = popularMovies.results.find(
     movie => movie.id === route.params.id
   );
 
-  const movie = popularMovies.find(movie => movie.id === route.params.id);
   return (
     <SafeAreaView>
       <View style={styles.container}>
