@@ -2,6 +2,7 @@
 import { initializeApp } from 'firebase/app';
 import { initializeAuth } from 'firebase/auth';
 import 'firebase/auth';
+import { collection, getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import Constants from 'expo-constants';
 import { getReactNativePersistence } from 'firebase/auth/react-native';
@@ -28,3 +29,6 @@ initializeAuth(app, {
   persistence: getReactNativePersistence(AsyncStorage)
 });
 export const auth = getAuth(app);
+export const db = getFirestore(app);
+
+export const userRef = collection(db, 'user');

@@ -7,12 +7,12 @@ const WelcomeScreen = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.buttons}>
         <Button
-          title='Sign in'
+          title='Sign In'
           buttonStyle={styles.button}
           onPress={() => navigation.navigate('Sign In')}
         />
         <Button
-          title='Sign up'
+          title='Sign Up'
           type='outline'
           buttonStyle={styles.button}
           onPress={() => navigation.navigate('Sign Up')}

@@ -15,12 +15,28 @@ import {
   Image,
   StyleSheet
 } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 const MovieScreen = ({ route }) => {
+  const [loading, setLoading] = useState(false);
+
   const popularMovies = useSelector(selectTrendingList);
   const movie = popularMovies.results.find(
     movie => movie.id === route.params.id
   );
+
+  const addMovie = async () => {
+    setLoading(true);
+    let doc = await addDoc(tripsRef, {
+      place,
+      country,
+      userId: user.uid
+    });
+    setLoading(false);
+    if (doc && doc.id) {
+      Icon.Navigation.goBack();
+    }
+  };
 
   return (
     <SafeAreaView>
@@ -38,7 +54,9 @@ const MovieScreen = ({ route }) => {
           />
         </View>
       </View>
-      <Icon.Share height={25} width={25} />
+      <TouchableOpacity onPress={addMovie}>
+        <Icon.Share height={25} width={25} />
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
