@@ -23,10 +23,9 @@ const AppNavigation = () => {
   const { user } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
-  onAuthStateChanged(auth, u => {
-    console.log('got user: ', u);
-    dispatch(setUser(u));
-  });
+  // onAuthStateChanged(auth, u => {
+  //   dispatch(setUser(u));
+  // });
   // if (user) {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -36,6 +35,11 @@ const AppNavigation = () => {
         component={HomeScreen}
       />
       <Stack.Screen
+        name='Movie'
+        options={{ headerShown: false }}
+        component={MovieScreen}
+      />
+      {/* <Stack.Screen
         headerShown={true}
         name='MovieScreen'
         component={MovieScreen}
@@ -50,7 +54,7 @@ const AppNavigation = () => {
         name='RandomScreen'
         component={RandomScreen}
         options={{ title: 'AI movies' }}
-      />
+			/> */}
     </Stack.Navigator>
   );
   // } else {

@@ -7,16 +7,25 @@ import {
   Image
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
+import { useNavigation } from '@react-navigation/core';
 
 const { height, width } = Dimensions.get('window');
 
 const TrendingMovies = ({ data }) => {
+  const navigation = useNavigation();
+
+  const handleClick = item => {
+    navigation.navigate('Movie', item);
+  };
+
   return (
     <View className='mb-8'>
       <Text className='text-white text-xl mx-4 mb5'>Trending</Text>
       <Carousel
         data={data}
-        renderItem={({ item }) => <MovieCard item={item} />}
+        renderItem={({ item }) => (
+          <MovieCard item={item} handleClick={() => handleClick(item)} />
+        )}
         firstItem={1}
         inactiveSlideOpacity={0.6}
         sliderWidth={width}
@@ -27,9 +36,9 @@ const TrendingMovies = ({ data }) => {
   );
 };
 
-const MovieCard = ({ data }) => {
+const MovieCard = ({ data, handleClick }) => {
   return (
-    <TouchableWithoutFeedback>
+    <TouchableWithoutFeedback onPress={handleClick}>
       <Image
         source={require('../assets/office.jpg')}
         style={{

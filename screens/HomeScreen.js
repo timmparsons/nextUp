@@ -13,11 +13,15 @@ import {
   MagnifyingGlassIcon
 } from 'react-native-heroicons/outline';
 import TrendingMovies from '../components/TrendingMovies';
+import MovieList from '../components/MovieList';
 
 const ios = Platform.OS === 'ios';
 
 const HomeScreen = () => {
   const [trending, setTrending] = useState([1, 2, 3]);
+  const [upcoming, setUpcoming] = useState([1, 2, 3, 4, 5, 6, 7]);
+  const [topRated, setTopRated] = useState([1, 2, 3, 4, 5, 6, 7]);
+
   return (
     <View className='flex-1 bg-neutral-800'>
       <SafeAreaView className={ios ? '-mb-2' : 'mb-3'}>
@@ -38,7 +42,14 @@ const HomeScreen = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 10 }}
       >
+        {/* Trending Movies Carousel */}
         <TrendingMovies data={trending} />
+
+        {/* Upcoming Movies Carousel */}
+        <MovieList title='Upcoming' data={upcoming} />
+
+        {/* TopRated Movies Carousel */}
+        <MovieList title='Top Rated' data={topRated} />
       </ScrollView>
     </View>
   );
