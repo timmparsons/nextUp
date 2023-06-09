@@ -12,7 +12,7 @@ import { useNavigation } from '@react-navigation/core';
 
 const { height, width } = Dimensions.get('window');
 
-const MovieList = ({ title, data }) => {
+const MovieList = ({ title, data, hideSeeAll }) => {
   const movieName = 'Ant Man and the Wasp';
   const navigation = useNavigation();
 
@@ -20,11 +20,13 @@ const MovieList = ({ title, data }) => {
     <View className='mb-8 space-y-4'>
       <View className='mx-4 flex-row justify-between items-center'>
         <Text className='text-white text-xl'>{title}</Text>
-        <TouchableOpacity>
-          <Text style={{ color: '#eab308' }} className='text-lg'>
-            See All
-          </Text>
-        </TouchableOpacity>
+        {!hideSeeAll && (
+          <TouchableOpacity>
+            <Text style={{ color: '#eab308' }} className='text-lg'>
+              See All
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
       {/* Movie Row */}
       <ScrollView
@@ -36,7 +38,7 @@ const MovieList = ({ title, data }) => {
           return (
             <TouchableWithoutFeedback
               key={index}
-              onPress={() => navigation.navigate('Movie', item)}
+              onPress={() => navigation.push('Movie', item)}
             >
               <View className='space-y-1 mr-4'>
                 <Image
