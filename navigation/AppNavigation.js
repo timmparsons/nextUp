@@ -16,6 +16,7 @@ import MovieScreen from '../screens/MovieScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
+import PersonScreen from '../screens/PersonScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +39,11 @@ const AppNavigation = () => {
         name='Movie'
         options={{ headerShown: false }}
         component={MovieScreen}
+      />
+      <Stack.Screen
+        name='Person'
+        options={{ headerShown: false }}
+        component={PersonScreen}
       />
       {/* <Stack.Screen
         headerShown={true}
