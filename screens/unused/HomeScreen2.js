@@ -1,27 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  FlatList,
-  ScrollView
-} from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, Image, FlatList, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import MovieItem from '../components/MovieItem';
-import {
-  selectTrendingList,
-  showMovieLoadingState,
-  selectShowPopup
-} from '../redux/slices/movieSlice';
-import { getTrendingMovies, getTrendingTvShows } from '../api/apiCalls';
-import SharePopup from '../components/SharePopup';
-import { useAuthentication } from '../utils/hooks/useAuthentication';
+import MovieItem from '../../components/MovieItem';
+import { selectTrendingList, showMovieLoadingState, selectShowPopup } from '../../redux/slices/movieSlice';
+import { getTrendingMovies, getTrendingTvShows } from '../../api/apiCalls';
+import SharePopup from '../../components/SharePopup';
+import { useAuthentication } from '../../utils/hooks/useAuthentication';
 import { getAuth, signOut } from 'firebase/auth';
-import { apiCalls } from '../api/index';
-import { ENDPOINTS } from '../constants';
+import { apiCalls } from '../../api/index';
+import { ENDPOINTS } from '../../constants';
 
 export default function HomeScreen({ navigation }) {
   const [activeCategory, setActiveCategory] = useState('Trending Movies');
@@ -60,23 +47,11 @@ export default function HomeScreen({ navigation }) {
                   onPress={() => {
                     setActiveCategory(topic.id);
                     console.log(topic.id);
-                    dispatch(
-                      topic.id === ENDPOINTS.trendingTvShows
-                        ? getTrendingTvShows()
-                        : getTrendingMovies()
-                    );
+                    dispatch(topic.id === ENDPOINTS.trendingTvShows ? getTrendingTvShows() : getTrendingMovies());
                   }}
                   style={styles.categoryContainer}
                 >
-                  <Text
-                    style={
-                      isActive
-                        ? styles.selectedCategory
-                        : styles.unselectedCategory
-                    }
-                  >
-                    {topic.id}
-                  </Text>
+                  <Text style={isActive ? styles.selectedCategory : styles.unselectedCategory}>{topic.id}</Text>
                 </TouchableOpacity>
               );
             })}

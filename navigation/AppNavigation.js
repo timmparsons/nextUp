@@ -10,8 +10,6 @@ import { setUser } from '../redux/slices/userSlice';
 import { auth } from '../config/firebase';
 
 import HomeScreen from '../screens/HomeScreen';
-import MyMoviesScreen from '../screens/MyMoviesScreen';
-import RandomScreen from '../screens/RandomScreen';
 import MovieScreen from '../screens/MovieScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import SignInScreen from '../screens/SignInScreen';
