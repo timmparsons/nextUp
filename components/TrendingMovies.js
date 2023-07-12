@@ -1,20 +1,15 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableWithoutFeedback,
-  Dimensions,
-  Image
-} from 'react-native';
+import { View, Text, TouchableWithoutFeedback, Dimensions, Image } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { useNavigation } from '@react-navigation/core';
+import { image500 } from '../api/movidedb';
 
 const { height, width } = Dimensions.get('window');
 
 const TrendingMovies = ({ data }) => {
   const navigation = useNavigation();
-
   const handleClick = item => {
+    console.log('CLICK', item);
     navigation.navigate('Movie', item);
   };
 
@@ -23,9 +18,7 @@ const TrendingMovies = ({ data }) => {
       <Text className='text-white text-xl mx-4 mb5'>Trending</Text>
       <Carousel
         data={data}
-        renderItem={({ item }) => (
-          <MovieCard item={item} handleClick={() => handleClick(item)} />
-        )}
+        renderItem={({ item }) => <MovieCard item={item} handleClick={() => handleClick(item)} />}
         firstItem={1}
         inactiveSlideOpacity={0.6}
         sliderWidth={width}
@@ -36,11 +29,11 @@ const TrendingMovies = ({ data }) => {
   );
 };
 
-const MovieCard = ({ data, handleClick }) => {
+const MovieCard = ({ item, handleClick }) => {
   return (
     <TouchableWithoutFeedback onPress={handleClick}>
       <Image
-        source={require('../assets/office.jpg')}
+        source={{ uri: image500(item.poster_path) }}
         style={{
           width: width * 0.6,
           height: height * 0.4

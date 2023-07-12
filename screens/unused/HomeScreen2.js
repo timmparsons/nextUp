@@ -3,7 +3,6 @@ import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, Image, FlatList
 import { useSelector, useDispatch } from 'react-redux';
 import MovieItem from '../../components/MovieItem';
 import { selectTrendingList, showMovieLoadingState, selectShowPopup } from '../../redux/slices/movieSlice';
-import { getTrendingMovies, getTrendingTvShows } from '../../api/apiCalls';
 import SharePopup from '../../components/SharePopup';
 import { useAuthentication } from '../../utils/hooks/useAuthentication';
 import { getAuth, signOut } from 'firebase/auth';
