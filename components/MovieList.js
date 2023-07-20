@@ -1,19 +1,11 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  TouchableWithoutFeedback,
-  Image,
-  Dimensions
-} from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, TouchableWithoutFeedback, Image, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
+import { image185 } from '../api/movidedb';
 
 const { height, width } = Dimensions.get('window');
 
 const MovieList = ({ title, data, hideSeeAll }) => {
-  const movieName = 'Ant Man and the Wasp';
   const navigation = useNavigation();
 
   return (
@@ -29,31 +21,19 @@ const MovieList = ({ title, data, hideSeeAll }) => {
         )}
       </View>
       {/* Movie Row */}
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 15 }}
-      >
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 15 }}>
         {data.map((item, index) => {
           return (
-            <TouchableWithoutFeedback
-              key={index}
-              onPress={() => navigation.push('Movie', item)}
-            >
+            <TouchableWithoutFeedback key={index} onPress={() => navigation.push('Movie', item)}>
               <View className='space-y-1 mr-4'>
                 <Image
                   source={{
-                    uri:
-                      'https://www.themoviedb.org/t/p/w1280/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg'
+                    uri: image185(item.poster_path)
                   }}
                   className='rounded-3xl'
                   style={{ width: width * 0.33, height: height * 0.22 }}
                 />
-                <Text className='text-neutral-300 ml-1'>
-                  {movieName.length > 14
-                    ? movieName.slice(0, 14) + '...'
-                    : movieName}
-                </Text>
+                <Text className='text-neutral-300 ml-1'>{title.length > 14 ? title.slice(0, 14) + '...' : title}</Text>
               </View>
             </TouchableWithoutFeedback>
           );

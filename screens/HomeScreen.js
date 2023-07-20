@@ -7,42 +7,24 @@ import { Bars3CenterLeftIcon, MagnifyingGlassIcon } from 'react-native-heroicons
 import TrendingMovies from '../components/TrendingMovies';
 import MovieList from '../components/MovieList';
 import { useNavigation } from '@react-navigation/native';
-import { fetchTrendingMovies } from '../api/movidedb';
-import { setTrendingMovies, selectTrendingMovies } from '../redux/slices/movieSlice';
+import { getTrendingMovies, getTopRatedMovies, getUpcomingMovies } from '../api/movidedb';
+import { selectTrendingMovies, selectUpcomingMovies, selectTopRatedMovies } from '../redux/slices/movieSlice';
 
 const ios = Platform.OS === 'ios';
 
 const HomeScreen = () => {
-  const [trending, setTrending] = useState([1, 2, 3]);
-  const [upcoming, setUpcoming] = useState([1, 2, 3, 4, 5, 6, 7]);
-  const [topRated, setTopRated] = useState([1, 2, 3, 4, 5, 6, 7]);
-  const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const trendingMovies = useSelector(selectTrendingMovies);
+  const upComingMovies = useSelector(selectUpcomingMovies);
+  const topRatedMovies = useSelector(selectTopRatedMovies);
 
   useEffect(() => {
-    getTrendingMovies();
+    getTrendingMovies(dispatch);
+    getUpcomingMovies(dispatch);
+    getTopRatedMovies(dispatch);
   }, []);
 
-  const getTrendingMovies = async () => {
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MGMwM2NhNzZkY2FiNzY3MDAzYmI5MDc2OGZmZTMwMyIsInN1YiI6IjVmMTM2NTdkNzg1NzBlMDAzNDU3YjczMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9JQqWVF0mvJY-vamd5lFkQhcs39AYlefqL3muHzitEg'
-      }
-    };
-
-    fetch('https://api.themoviedb.org/3/trending/movie/day?language=en-US', options)
-      .then(response => response.json())
-      .then(response => {
-        dispatch(setTrendingMovies({ movies: response }));
-      })
-      .catch(err => console.error(err));
-  };
-  console.log('qwe', trendingMovies);
   return (
     <View className='flex-1 bg-neutral-800'>
       <SafeAreaView className={ios ? '-mb-2' : 'mb-3'}>
@@ -64,10 +46,10 @@ const HomeScreen = () => {
         {trendingMovies && <TrendingMovies data={trendingMovies} />}
 
         {/* Upcoming Movies Carousel */}
-        <MovieList title='Upcoming' data={upcoming} />
+        <MovieList title='Upcoming' data={upComingMovies} />
 
         {/* TopRated Movies Carousel */}
-        <MovieList title='Top Rated' data={topRated} />
+        <MovieList title='Top Rated' data={topRatedMovies} />
       </ScrollView>
     </View>
   );

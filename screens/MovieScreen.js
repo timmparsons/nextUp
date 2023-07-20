@@ -14,13 +14,24 @@ const topMargin = ios ? '' : 'mt-3';
 
 const MovieScreen = () => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [cast, setCast] = useState([1, 2, 3, 4]);
   const [similarMovies, setSimilarMovies] = useState([1, 2, 3, 4]);
   const { params: item } = useRoute();
   const navigation = useNavigation();
   const movieName = 'Ant Man and the Wasp';
 
-  useEffect(() => {}, [item]);
+  useEffect(() => {
+    console.log('qqq', item.id);
+    setLoading(true);
+    getMovieDetails(item.id);
+  }, [item]);
+
+  const getMovieDetails = async id => {
+    const data = await getMovieDetails(id);
+    console.log('qqq', data);
+    setLoading(false);
+  };
 
   return (
     <ScrollView contentContainerStyle={{ paddingBottom: 20 }} className='flex-1 bg-neutral-900 p-5'>

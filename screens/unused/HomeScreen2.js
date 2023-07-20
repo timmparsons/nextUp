@@ -19,7 +19,6 @@ export default function HomeScreen({ navigation }) {
 
   const trendingList = useSelector(selectTrendingList);
   const dispatch = useDispatch();
-  console.log('qqq', trendingList?.results);
   useEffect(() => {
     dispatch(getTrendingMovies());
   }, []);
