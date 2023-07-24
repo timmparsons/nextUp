@@ -3,7 +3,7 @@ import {
   setTrendingMovies,
   setTopRatedMovies,
   setUpcomingMovies,
-  setMovieCredits,
+  setMovieCast,
   setMovieDetails,
   setSimilarMovies
 } from '../redux/slices/movieSlice';
@@ -13,9 +13,9 @@ const trendingMoviesEndpoint = `${apiBaseUrl}/trending/movie/day?language=en-US`
 const upcomingMoviesEndpoint = `${apiBaseUrl}/movie/upcoming?language=en-US&page=1`;
 const topRatedMoviesEndpoint = `${apiBaseUrl}/trending/movie/day?language=en-US`;
 
-const movieDetailsEndpoint = id => `${apiBaseUrl}/movie/${id}?language=en-US`;
-const movieCreditsEndpoint = id => `${apiBaseUrl}/movie/${id}/credits?language=en-US`;
-const similarMoviesEndpoint = id => `${apiBaseUrl}/movie/${id}/similar?language=en-US`;
+const movieDetailsEndpoint = id => `${apiBaseUrl}/movie/${id}`;
+const movieCastEndpoint = id => `${apiBaseUrl}/movie/${id}/credits`;
+const similarMoviesEndpoint = id => `${apiBaseUrl}/movie/${id}/similar`;
 
 export const image500 = path => (path ? `https://image.tmdb.org/t/p/w500${path}` : null);
 export const image185 = path => (path ? `https://image.tmdb.org/t/p/w185${path}` : null);
@@ -50,13 +50,16 @@ export const getTopRatedMovies = dispatch => {
   return apiCall(topRatedMoviesEndpoint, setTopRatedMovies, dispatch);
 };
 
-export const getMovieDetails = dispatch => {
-  return apiCall(movieDetailsEndpoint, setMovieDetails, dispatch);
+export const fetchMovieDetails = async (id, dispatch) => {
+  fetch(movieDetailsEndpoint(id), apiOptions)
+    .then(response => response.json())
+    .then(json => dispatch(setMovieDetails(json)).catch(err => console.error(err)));
 };
 
-export const getMovieCredits = dispatch => {
-  return apiCall(movieCreditsEndpoint, setMovieCredits, dispatch);
-};
+export const fetchMovieCast = async (id, dispatch) => {
+	fetch(movieCastEndpoint(id), apiOptions)
+	.then(response => response.json())
+	.then(json => dispatch(setMovieCast(json)).catch(err => console.error(err)));};
 
 export const getSimilarMovies = dispatch => {
   return apiCall(similarMoviesEndpoint, setSimilarMovies, dispatch);

@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   error: null,
   movieDetails: [],
+	movieCast: [],
   popularMovies: null,
   showSharePopup: false,
   similarMovies: [],
@@ -32,10 +33,10 @@ export const movieSlice = createSlice({
       state.topRatedMovies = action.payload.movies.results;
     },
     setMovieDetails: (state, action) => {
-      state.movieDetails = action.payload.movies.results;
+      state.movieDetails = action.payload;
     },
-    setMovieCredits: (state, action) => {
-      state.movieCredits = action.payload.results;
+    setMovieCast: (state, action) => {
+      state.movieCast = action.payload.cast;
     },
     setSimilarMovies: (state, action) => {
       state.similarMovies = action.payload.results;
@@ -51,7 +52,7 @@ export const {
   setTopRatedMovies,
   setUpcomingMovies,
   setMovieDetails,
-  setMovieCredits,
+  setMovieCast,
   setSimilarMovies
 } = movieSlice.actions;
 
@@ -60,7 +61,7 @@ export const selectTrendingMovies = state => state.movie.trendingMovies;
 export const selectUpcomingMovies = state => state.movie.upcomingMovies;
 export const selectTopRatedMovies = state => state.movie.topRatedMovies;
 export const selectMovieDetails = state => state.movie.movieDetails;
-export const selectMovieCredits = state => state.movie.movieCredits;
+export const selectMovieCast = state => state.movie.movieCast;
 export const selectSimilarMovies = state => state.movie.similarMovies;
 
 export default movieSlice.reducer;

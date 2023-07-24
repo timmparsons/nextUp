@@ -9,7 +9,6 @@ const { height, width } = Dimensions.get('window');
 const TrendingMovies = ({ data }) => {
   const navigation = useNavigation();
   const handleClick = item => {
-    console.log('CLICK', item);
     navigation.navigate('Movie', item);
   };
 
