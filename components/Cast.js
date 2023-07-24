@@ -1,18 +1,18 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { image185 } from '../api/movidedb';
 
 const Cast = ({ cast, navigation }) => {
-  let personName = 'Keanu Reeves';
-  let characterName = 'John Wick';
 
+  let characterName = 'John Wick';
   return (
-    <View className='my-6'>
+		<View className='my-6'>
       <Text className='text-white text-lg mx-4 mb-5'>Top Cast</Text>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingHorizontal: 15 }}
-      >
+				>
         {cast &&
           cast.map((person, index) => {
             return (
@@ -25,20 +25,19 @@ const Cast = ({ cast, navigation }) => {
                   <Image
                     className='rounded-2xl h-24 w-20'
                     source={{
-                      uri:
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdcOTud9GWMc1fJr1EjOX06mG2XrFQsmSGOhWqNRQW9YktfPvSiKuSUljO60lnE3-j3Qyp&s'
+                      uri:image185(person.profile_path)
                     }}
                   />
                 </View>
                 <Text className='text-white text-xs mt-1'>
-                  {characterName.length > 10
-                    ? characterName.slice(0, 10) + '...'
-                    : characterName}
+                  {person.character.length > 10
+                    ? person.character.slice(0, 10) + '...'
+                    : person.character}
                 </Text>
                 <Text className='text-neutral-400 text-xs mt-1'>
-                  {personName.length > 10
-                    ? personName.slice(0, 10) + '...'
-                    : personName}
+                  {person.name.length > 10
+                    ? person.name.slice(0, 10) + '...'
+                    : person.name}
                 </Text>
               </TouchableOpacity>
             );

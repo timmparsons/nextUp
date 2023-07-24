@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { View, Text, Platform, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
@@ -6,14 +7,23 @@ import { Bars3CenterLeftIcon, MagnifyingGlassIcon } from 'react-native-heroicons
 import TrendingMovies from '../components/TrendingMovies';
 import MovieList from '../components/MovieList';
 import { useNavigation } from '@react-navigation/native';
+import { getTrendingMovies, getTopRatedMovies, getUpcomingMovies } from '../api/movidedb';
+import { selectTrendingMovies, selectUpcomingMovies, selectTopRatedMovies } from '../redux/slices/movieSlice';
 
 const ios = Platform.OS === 'ios';
 
 const HomeScreen = () => {
-  const [trending, setTrending] = useState([1, 2, 3]);
-  const [upcoming, setUpcoming] = useState([1, 2, 3, 4, 5, 6, 7]);
-  const [topRated, setTopRated] = useState([1, 2, 3, 4, 5, 6, 7]);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const trendingMovies = useSelector(selectTrendingMovies);
+  const upComingMovies = useSelector(selectUpcomingMovies);
+  const topRatedMovies = useSelector(selectTopRatedMovies);
+
+  useEffect(() => {
+    getTrendingMovies(dispatch);
+    getUpcomingMovies(dispatch);
+    getTopRatedMovies(dispatch);
+  }, []);
 
   return (
     <View className='flex-1 bg-neutral-800'>
@@ -33,13 +43,13 @@ const HomeScreen = () => {
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 10 }}>
         {/* Trending Movies Carousel */}
-        <TrendingMovies data={trending} />
+        {trendingMovies && <TrendingMovies data={trendingMovies} />}
 
         {/* Upcoming Movies Carousel */}
-        <MovieList title='Upcoming' data={upcoming} />
+        <MovieList title='Upcoming' data={upComingMovies} />
 
         {/* TopRated Movies Carousel */}
-        <MovieList title='Top Rated' data={topRated} />
+        <MovieList title='Top Rated' data={topRatedMovies} />
       </ScrollView>
     </View>
   );
