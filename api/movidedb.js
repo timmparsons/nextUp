@@ -15,7 +15,7 @@ const topRatedMoviesEndpoint = `${apiBaseUrl}/trending/movie/day?language=en-US`
 
 const movieDetailsEndpoint = id => `${apiBaseUrl}/movie/${id}`;
 const movieCastEndpoint = id => `${apiBaseUrl}/movie/${id}/credits`;
-const similarMoviesEndpoint = id => `${apiBaseUrl}/movie/${id}/similar`;
+const similarMoviesEndpoint = id => `${apiBaseUrl}/movie/${id}/similar?page=1`
 
 export const image500 = path => (path ? `https://image.tmdb.org/t/p/w500${path}` : null);
 export const image185 = path => (path ? `https://image.tmdb.org/t/p/w185${path}` : null);
@@ -61,6 +61,8 @@ export const fetchMovieCast = async (id, dispatch) => {
 	.then(response => response.json())
 	.then(json => dispatch(setMovieCast(json)).catch(err => console.error(err)));};
 
-export const getSimilarMovies = dispatch => {
-  return apiCall(similarMoviesEndpoint, setSimilarMovies, dispatch);
-};
+export const fetchSimilarMovies = async (id, dispatch) => {
+	fetch(similarMoviesEndpoint(id), apiOptions)
+  .then(response => response.json())
+	.then(json => dispatch(setSimilarMovies(json)).catch(err => console.error(err)));
+}
