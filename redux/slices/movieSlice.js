@@ -4,6 +4,7 @@ const initialState = {
   error: null,
   movieDetails: [],
 	movieCast: [],
+	person: {},
   popularMovies: null,
   showSharePopup: false,
   similarMovies: [],
@@ -40,7 +41,10 @@ export const movieSlice = createSlice({
     },
     setSimilarMovies: (state, action) => {
       state.similarMovies = action.payload.results;
-    }
+    },
+		setPerson: (state, action) => {
+			state.person = action.payload;
+		}
   }
 });
 
@@ -53,7 +57,8 @@ export const {
   setUpcomingMovies,
   setMovieDetails,
   setMovieCast,
-  setSimilarMovies
+  setSimilarMovies,
+	setPerson
 } = movieSlice.actions;
 
 // Selectors
@@ -63,5 +68,6 @@ export const selectTopRatedMovies = state => state.movie.topRatedMovies;
 export const selectMovieDetails = state => state.movie.movieDetails;
 export const selectMovieCast = state => state.movie.movieCast;
 export const selectSimilarMovies = state => state.movie.similarMovies;
+export const selectPerson = state => state.movie.person;
 
 export default movieSlice.reducer;

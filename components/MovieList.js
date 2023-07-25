@@ -32,7 +32,7 @@ const MovieList = ({ title, data, hideSeeAll }) => {
                   className='rounded-3xl'
                   style={{ width: width * 0.33, height: height * 0.22 }}
                 />
-                <Text className='text-neutral-300 ml-1'>{item.original_title.length > 14 ? item.original_title.slice(0, 14) + '...' : item.original_title}</Text>
+                <Text className='text-neutral-300 ml-1'>{item.original_title.length > 14 ? item.original_title.slice(0, 14) + '...' : item.or}</Text>
               </View>
             </TouchableWithoutFeedback>
           );
