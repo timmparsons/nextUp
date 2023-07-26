@@ -8,8 +8,8 @@ import { HeartIcon } from 'react-native-heroicons/solid';
 import { LinearGradient } from 'expo-linear-gradient';
 import Cast from '../components/Cast';
 import MovieList from '../components/MovieList';
-import { fetchMovieDetails, fetchMovieCast, image185, image500 } from '../api/movidedb';
-import { selectMovieDetails, selectMovieCast } from '../redux/slices/movieSlice';
+import { fetchMovieDetails, fetchMovieCast, image185, image500, fetchSimilarMovies } from '../api/movidedb';
+import { selectMovieDetails, selectMovieCast, selectSimilarMovies } from '../redux/slices/movieSlice';
 
 const { height, width } = Dimensions.get('window');
 const ios = Platform.OS === 'ios';
@@ -18,19 +18,21 @@ const topMargin = ios ? '' : 'mt-3';
 const MovieScreen = () => {
 	const [isFavorite, setIsFavorite] = useState(false);
 	const [loading, setLoading] = useState(false);
-	const [similarMovies, setSimilarMovies] = useState([1, 2, 3, 4]);
+	// const [similarMovies, setSimilarMovies] = useState([1, 2, 3, 4]);
 	const { params: item } = useRoute();
-	
+
 	const dispatch = useDispatch();
 	const navigation = useNavigation();
 
 	const movieDetails = useSelector(selectMovieDetails);
 	const movieCast = useSelector(selectMovieCast);
+	const similarMovies = useSelector(selectSimilarMovies);
 
 	useEffect(() => {
 		setLoading(true);
 		getMovieDetails(item?.id);
 		getMovieCast(item?.id);
+		getSimilarMovies(item?.id);
 	}, [item]);
 
 	const getMovieDetails = async id => {
@@ -40,6 +42,11 @@ const MovieScreen = () => {
 
 	const getMovieCast = async id => {
 		await fetchMovieCast(id, dispatch);
+		setLoading(false);
+	};
+
+	const getSimilarMovies = async id => {
+		await fetchSimilarMovies(id, dispatch);
 		setLoading(false);
 	};
 

@@ -3,8 +3,6 @@ import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { image185 } from '../api/movidedb';
 
 const Cast = ({ cast, navigation }) => {
-
-  let characterName = 'John Wick';
   return (
 		<View className='my-6'>
       <Text className='text-white text-lg mx-4 mb-5'>Top Cast</Text>
